@@ -7,9 +7,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
 
-    <title>
-      Title
-    </title>
+    <title>When to use TEEs for TREs</title>
 
     <link rel="stylesheet" href="reveal.js/dist/reset.css" />
     <link rel="stylesheet" href="reveal.js/dist/reveal.css" />
@@ -80,13 +78,98 @@
     <div class="reveal">
       <div class="slides">
         <section>
-          <h1 class="r-fit-text">Slide 1</h1></section>
+          <h1 class="r-fit-text">When to use TEEs for TREs</h1>
+        </section>
         <section>
-          <h2>Slide 2</h2>
-          <!-- prettier-ignore -->
-          <aside data-markdown class="notes">
-            Markdown notes
-          </aside>
+          <section data-auto-animate>
+            <h2>Security Trade Off</h2>
+            <p>Why not <em>all</em> the security <em>all</em> the time?</p>
+            <!-- prettier-ignore -->
+            <aside data-markdown class="notes">
+              Markdown notes
+            </aside>
+          </section>
+          <section data-auto-animate>
+            <h2>Security Trade Off</h2>
+            <h3>Some Theory</h3>
+            <p>attack surface</p>
+            <p>trusted compute base</p>
+            <!-- prettier-ignore -->
+            <aside data-markdown class="notes">
+              Markdown notes
+            </aside>
+          </section>
+          <section data-auto-animate>
+            <h2>Security Trade Off</h2>
+            <p>There is a <em>cost</em> to introducing security</p>
+            <ul>
+              <li>Time to deploy</li>
+              <li>Upkeep</li>
+              <li>Increased complexity</li>
+            </ul>
+            <!-- prettier-ignore -->
+            <aside data-markdown class="notes">
+              Markdown notes
+            </aside>
+          </section>
+          <section data-auto-animate>
+            <h2>Security Trade Off</h2>
+            <h3>When not to add more</h3>
+            <ul>
+              <li>The cost outweighs the benefit</li>
+              <li>Overlapping with existing controls</li>
+            </ul>
+            <p>However, <em>independent</em> controls for the same vulnerability make systems <em>more robust</em></p>
+            <!-- prettier-ignore -->
+            <aside data-markdown class="notes">
+              Markdown notes
+            </aside>
+          </section>
+        </section>
+        <section>
+          <section data-auto-animate>
+            <h2>A Refresher</h2>
+            <h3>Trusted Research Environments</h3>
+          </section>
+          <section data-auto-animate>
+            <h2>A Refresher</h2>
+            <h3>Trusted Execution Environments</h3>
+          </section>
+        </section>
+        <section>
+          <section data-auto-animate>
+            <h2>TEEs for TREs</h2>
+            <h3>What a TEE protects against</h3>
+          </section>
+          <section data-auto-animate>
+            <h2>TEEs for TREs</h2>
+            <h3>TRE scenarios</h3>
+          </section>
+          <section data-auto-animate>
+            <h2>TEEs for TREs</h2>
+            <h3>The cost of TEEs</h3>
+          </section>
+        </section>
+        <section>
+          <section data-auto-animate>
+            <h2>A Proposal</h2>
+            <h3>Variables</h3>
+            <ul>
+              <li>Who owns the host?</li>
+              <li>Do users/projects need to be isolated?</li>
+              <li>What is the model for multi-user/tenancy?</li>
+              <li>Trust in the host or host admins</li>
+            </ul>
+          </section>
+          <section data-auto-animate>
+            <h2>A Proposal</h2>
+            <p>Use a TEE as part of your TRE when,</p>
+            <ol>
+              <li>you require strong isolation from the host</li>
+              <li>you require strong isolation between jobs</li>
+              <li>you are handling highly sensitive data</li>
+            </ol>
+          </section>
         </section>
       </div>
     </div>
