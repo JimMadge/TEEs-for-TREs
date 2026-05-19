@@ -1,0 +1,34 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:147.0) Gecko/20100101 Firefox/147.0">
+  <diagram name="Page-1" id="YLa6NmsERiNdYeezztGS">
+    <mxGraphModel dx="857" dy="484" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="qPL8I98v4pK5hYtOwnda-10" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#CB4B16;strokeWidth=6;align=center;verticalAlign=bottom;fontFamily=Helvetica;fontSize=26;fontColor=#839496;fillColor=none;labelPosition=center;verticalLabelPosition=top;" value="Host" vertex="1">
+          <mxGeometry height="220" width="400" x="700" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="_1yCGprrSzoCU1rlM5vc-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=26;fontColor=#839496;strokeWidth=6;strokeColor=#CB4B16;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;fillColor=none;" value="TRE" vertex="1">
+          <mxGeometry height="140" width="320" x="740" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="qPL8I98v4pK5hYtOwnda-9" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;strokeWidth=4;fillColor=none;strokeColor=#B58900;" value="" vertex="1">
+          <mxGeometry height="90" width="45" x="770" y="305" as="geometry" />
+        </mxCell>
+        <mxCell id="qPL8I98v4pK5hYtOwnda-11" parent="1" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://icons.diagrams.net/icon-cache1/Summer_Glyph_24_px-2729/passport_identification_identity_document_travel-612.svg;imageBackground=none;imageBorder=none;" value="" vertex="1">
+          <mxGeometry height="50" width="50" x="800" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="qPL8I98v4pK5hYtOwnda-15" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;strokeWidth=4;fillColor=none;strokeColor=#859900;" value="" vertex="1">
+          <mxGeometry height="90" width="45" x="880" y="305" as="geometry" />
+        </mxCell>
+        <mxCell id="qPL8I98v4pK5hYtOwnda-16" parent="1" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://icons.diagrams.net/icon-cache1/Summer_Glyph_24_px-2729/passport_identification_identity_document_travel-612.svg;imageBackground=none;imageBorder=none;" value="" vertex="1">
+          <mxGeometry height="50" width="50" x="910" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="qPL8I98v4pK5hYtOwnda-17" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;strokeWidth=4;fillColor=none;strokeColor=#859900;" value="" vertex="1">
+          <mxGeometry height="90" width="45" x="960" y="305" as="geometry" />
+        </mxCell>
+        <mxCell id="qPL8I98v4pK5hYtOwnda-18" parent="1" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://icons.diagrams.net/icon-cache1/Summer_Glyph_24_px-2729/passport_identification_identity_document_travel-612.svg;imageBackground=none;imageBorder=none;" value="" vertex="1">
+          <mxGeometry height="50" width="50" x="990" y="335" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

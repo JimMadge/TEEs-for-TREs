@@ -61,6 +61,12 @@
       .fragment.blur.visible {
         filter: none;
       }
+      .fragment.current-blur {
+        filter: blur(8px);
+      }
+      .fragment.current-blur.current-fragment {
+        filter: none;
+      }
       :root {
         --accent: #b58900;
       }
@@ -71,6 +77,10 @@
       }
       em {
         color: var(--accent);
+      }
+      .solid {
+        background-color: #002b36;
+        opacity: 1;
       }
     </style>
   </head>
@@ -92,20 +102,37 @@
           <section data-auto-animate>
             <h2>Security Trade Off</h2>
             <h3>Some Theory</h3>
-            <p>attack surface</p>
-            <p>trusted compute base</p>
+            <div class="columns">
+              <div class="column" style="width: 35%">
+                <p class="fragment custom blur">Attack surface</p>
+                <p class="fragment custom blur">Trusted compute base</p>
+                <p class="fragment custom blur">
+                  Social engineering and non-technical vulnerabilities
+                </p>
+              </div>
+              <div class="column" style="width: 65%">
+                <img src="static/house.jpg" width="800" />
+              </div>
+            </div>
             <!-- prettier-ignore -->
             <aside data-markdown class="notes">
-              Markdown notes
+              - Attack Surface: all of the targets that could be attacked
+                - May be exposed network points
+                - Think, all of the points to enter a house, doors, windows
+              - Trusted compute base: all of the computer components you need to trust for security
+                - Think, what needs to work to secure a house, locks, hinges
+              - Social engineering: pressuring or persuading people to compromise security
+                - Could be bribing, threats
+                - For example, who has left the door open!
             </aside>
           </section>
           <section data-auto-animate>
             <h2>Security Trade Off</h2>
             <p>There is a <em>cost</em> to introducing security</p>
             <ul>
-              <li>Time to deploy</li>
-              <li>Upkeep</li>
-              <li>Increased complexity</li>
+              <li class="fragment custom blur">Deployment</li>
+              <li class="fragment custom blur">Upkeep</li>
+              <li class="fragment custom blur">Increased complexity</li>
             </ul>
             <!-- prettier-ignore -->
             <aside data-markdown class="notes">
@@ -116,13 +143,19 @@
             <h2>Security Trade Off</h2>
             <h3>When not to add more</h3>
             <ul>
-              <li>The cost outweighs the benefit</li>
-              <li>Overlapping with existing controls</li>
+              <li>The cost <em>outweighs</em> the benefit</li>
+              <li><em>Overlaps</em> with existing controls</li>
             </ul>
-            <p>However, <em>independent</em> controls for the same vulnerability make systems <em>more robust</em></p>
+            <p class="fragment custom blur">
+              However, <em>independent</em> controls for the same vulnerability
+              make systems <em>more robust</em>
+            </p>
             <!-- prettier-ignore -->
             <aside data-markdown class="notes">
-              Markdown notes
+              - A dedicated security team _would_ improve your home security, but it is necessary?
+                Could you afford it?
+              - If your door already has a strong, multi-point lock, dead bolts add less benefit than if there were no lock
+              - Or, locks on windows above the ground floor are less important
             </aside>
           </section>
         </section>
@@ -130,24 +163,144 @@
           <section data-auto-animate>
             <h2>A Refresher</h2>
             <h3>Trusted Research Environments</h3>
+            <div class="r-stack">
+              <figure>
+                <img width="500" src="static/sensitive-data.jpg" />
+                <figcaption>
+                  <a href="https://doi.org/10.5281/zenodo.13882307">
+                    The Turing Way Community, &amp; Scriberia. (2024).
+                    Illustrations from The Turing Way: Shared under CC-BY 4.0
+                    for reuse.
+                  </a>
+                </figcaption>
+              </figure>
+              <blockquote class="fragment" style="background-color: #002b36">
+                <em>Secure</em> computational environments which
+                <em>enable research</em> on sensitive data. They contain tools
+                to improve research <em>speed and quality</em> as well as
+                controls for <em>access</em>, and <em>data release</em>.
+              </blockquote>
+            </div>
           </section>
           <section data-auto-animate>
             <h2>A Refresher</h2>
             <h3>Trusted Execution Environments</h3>
+            <div class="r-stack">
+              <img class="r-stretch" src="static/secure_memory.svg" />
+              <blockquote class="fragment" style="background-color: #002b36">
+                With a <em>Trusted Execution Environment</em> (TEE), you can use
+                a computer in a way that is <em>private</em> from other users,
+                even the <em>owner</em> of that computer. Works through
+                <em>encrypting</em> data <em>in use</em>.
+              </blockquote>
+            </div>
           </section>
         </section>
         <section>
           <section data-auto-animate>
             <h2>TEEs for TREs</h2>
             <h3>What a TEE protects against</h3>
+            <img width="1000" src="static/tee_protection.svg" />
+            <aside data-markdown class="notes">
+              - All users/processes one the same host, outside your TEE
+              (including other TEEs) - For example, other users on the same
+              computer - The admins of the host - An attacker who compromises
+              the host
+            </aside>
           </section>
           <section data-auto-animate>
             <h2>TEEs for TREs</h2>
-            <h3>TRE scenarios</h3>
+            <h3>What a TEE doesn't protect against</h3>
+            <div class="r-stack">
+              <img width="1000" src="static/tee_protection_2.svg" />
+              <p class="fragment solid"><em>Social engineering</em> attacks</p>
+            </div>
+            <!-- prettier-ignore -->
+            <aside data-markdown class="notes">
+              - Users/processes _within_ the TEE
+              - Social engineering attacks
+            </aside>
           </section>
           <section data-auto-animate>
             <h2>TEEs for TREs</h2>
             <h3>The cost of TEEs</h3>
+            <ul>
+              <li class="fragment custom blur">
+                Requires <em>recent</em> CPUs
+              </li>
+              <li class="fragment custom blur">
+                Must <em>attest</em> all TEEs
+              </li>
+              <li class="fragment custom blur">
+                An <em>attestation policy</em> must be created and maintained
+              </li>
+            </ul>
+            <!-- prettier-ignore -->
+            <aside data-markdown class="notes">
+              - Specific hardware is required
+              - Provisioning is more complicated, attestation must occur
+              - Need extra processes to check compliance
+              - Attestation can be partially automated, with a suitable policy.
+                However, it is still necessary to design a robust and appropriate policy, and review this.
+            </aside>
+          </section>
+        </section>
+        <section>
+          <section data-auto-animate>
+            <h2>TRE scenarios</h2>
+            <h3>Hosting and Shared Responsibility</h3>
+            <p><em>Self-hosted</em> or <em>third party</em> hosting</p>
+            <!-- <p>For example,</p> -->
+            <ul>
+              <li class="fragment custom blur">
+                SAIL Databank, hosted and operated <em>on-premises</em> by
+                Swansea University
+              </li>
+              <li class="fragment custom blur">
+                A FRIDGE instance, <em>operated</em> by The Turing,
+                <em>hosted</em> by Cambridge University
+              </li>
+              <li class="fragment custom blur">
+                A Data Safe Haven instance, <em>operated</em> by The Turing,
+                <em>hosted</em> on The Turing's Azure <em>tenant</em>
+              </li>
+              <li class="fragment custom blur">
+                OpenSAFELY, <em>operated</em> by the Bennett Institute,
+                <em>distributed</em> on the <em>cloud</em> and
+                <em>safe havens</em>
+              </li>
+            </ul>
+            <!-- prettier-ignore -->
+            <aside data-markdown class="notes">
+              - Self-hosted
+              - Third party host
+            </aside>
+          </section>
+          <section data-auto-animate>
+            <h2>TRE scenarios</h2>
+            <h3>Isolated Workspace</h3>
+            <img class="r-stretch" src="static/isolated_workspaces.svg" />
+            <!-- prettier-ignore -->
+            <aside data-markdown class="notes">
+              - Projects isolated by machines (VMs)
+            </aside>
+          </section>
+          <section data-auto-animate>
+            <h2>TRE scenarios</h2>
+            <h3>User-level Controls</h3>
+            <img class="r-stretch" src="static/rbac.svg" />
+            <!-- prettier-ignore -->
+            <aside data-markdown class="notes">
+              - _e.g._ Scottish NHS Safe Haven (circa 2020)
+            </aside>
+          </section>
+          <section data-auto-animate>
+            <h2>TRE scenarios</h2>
+            <h3>Satellite Runner</h3>
+            <img class="r-stretch" src="static/satellite.svg" />
+            <!-- prettier-ignore -->
+            <aside data-markdown class="notes">
+            </aside>
           </section>
         </section>
         <section>
@@ -155,19 +308,60 @@
             <h2>A Proposal</h2>
             <h3>Variables</h3>
             <ul>
-              <li>Who owns the host?</li>
-              <li>Do users/projects need to be isolated?</li>
-              <li>What is the model for multi-user/tenancy?</li>
-              <li>Trust in the host or host admins</li>
+              <li>Who <em>controls</em> the <em>host</em>?</li>
+              <li><em>Trust</em> in the <em>host</em> or host admins</li>
+              <li>
+                TRE <em>design</em>
+                <ul>
+                  <li>Do <em>users/projects</em> need to be isolated?</li>
+                  <li>What is the model for <em>multi-user/tenancy?</em></li>
+                </ul>
+              </li>
             </ul>
+          </section>
+          <section data-auto-animate>
+            <h2>A Proposal</h2>
+            <h3>IETF RFC 2119</h3>
+            <blockquote>
+              The key words <em>"MUST"</em>, "MUST NOT", "REQUIRED", "SHALL",
+              "SHALL NOT", <em>"SHOULD"</em>, "SHOULD NOT", "RECOMMENDED",
+              <em>"MAY"</em>, and "OPTIONAL" in this document are to be
+              interpreted as described in
+              <a href="https://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>.
+            </blockquote>
+            <!-- prettier-ignore -->
+            <aside data-markdown class="notes">
+              - Internet Engineering Task Force
+              - Request for comments
+              - A document explaining the meaning of terms like "MUST", "SHOULD", "MAY"
+              - I wanted to find a way to fit combinations of variables to these terms, but it didn't feel that simple
+            </aside>
           </section>
           <section data-auto-animate>
             <h2>A Proposal</h2>
             <p>Use a TEE as part of your TRE when,</p>
             <ol>
-              <li>you require strong isolation from the host</li>
-              <li>you require strong isolation between jobs</li>
-              <li>you are handling highly sensitive data</li>
+              <li class="fragment custom blur">
+                you require strong isolation <em>from the host</em>
+                <p class="fragment custom current-blur">
+                  for example when the host <em>is not</em> the TRE operator
+                </p>
+              </li>
+              <li class="fragment custom blur">
+                you require strong isolation <em>between jobs</em>
+                <p class="fragment custom current-blur">
+                  for example when data access is managed at the
+                  <em>user level</em> or multiple projects
+                  <em>share compute</em>
+                </p>
+              </li>
+              <li class="fragment custom blur">
+                you are handling <em>highly sensitive</em> data
+                <p class="fragment custom current-blur">
+                  where the risk justifies maximising security, for example
+                  danger to <em>safety or life</em>
+                </p>
+              </li>
             </ol>
           </section>
         </section>
