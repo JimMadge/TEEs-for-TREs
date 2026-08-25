@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
 
-    <title>When to use TEEs for TREs</title>
+    <title>TEEs for TREs</title>
 
     <link rel="stylesheet" href="reveal.js/dist/reset.css" />
     <link rel="stylesheet" href="reveal.js/dist/reveal.css" />
@@ -21,6 +21,13 @@
 
     <!-- Custom styling -->
     <style>
+      /* accent colour */
+      :root {
+        --accent: #b58900;
+      }
+      em {
+        color: var(--accent);
+      }
       /* Capitalise headings */
       .reveal h1,
       .reveal h2,
@@ -56,31 +63,33 @@
       }
       /* Blur fragment */
       .fragment.blur {
+        &.visible {
+          filter: none;
+        }
         filter: blur(8px);
       }
-      .fragment.blur.visible {
-        filter: none;
-      }
+      /* Blur when current fragment */
       .fragment.current-blur {
         filter: blur(8px);
+        &.current-fragment {
+          filter: none;
+        }
       }
-      .fragment.current-blur.current-fragment {
-        filter: none;
-      }
-      :root {
-        --accent: #b58900;
-      }
+      /* Highlight fragment */
       .fragment.highlight {
         &.current-fragment {
           color: var(--accent);
         }
-      }
-      em {
-        color: var(--accent);
+        &.visible {
+          filter: none;
+        }
       }
       .solid {
         background-color: #002b36;
         opacity: 1;
+      }
+      .blur{
+        filter: blur(8px);
       }
     </style>
   </head>
@@ -88,27 +97,93 @@
     <div class="reveal">
       <div class="slides">
         <section>
-          <h1 class="r-fit-text">When to use TEEs for TREs</h1>
+          <h1 class="r-fit-text">Trusted Execution Environments for TREs</h1>
+          <h3>When to use them and what you need to know</h3>
         </section>
+        <!--
+          What are TEEs?
+        -->
         <section>
           <section data-auto-animate>
-            <h2>Security Trade Off</h2>
+            <h2>Trusted Execution Environments</h2>
+            <div class="r-stack">
+              <p class="fragment fade-out solid" >
+                TEEs <em>encrypt</em> data <em>in use</em>.<br />
+                With a TEE, you can use a computer in a way that is
+                <em>private</em> from other users, even the <em>owner</em> of
+                that computer.
+              </p>
+              <img class="r-stretch" src="static/secure_memory.svg" />
+            </div>
+          </section>
+          <section data-auto-animate>
+            <h2>Trusted Execution Environments</h2>
+            <h3>Attestation</h3>
+            <p>
+              A TEE is able to <em>prove</em> it is <em>secure and configured</em> correctly.
+            </p>
+            <p>
+              The <em>secure processor</em> collects and signs <em>evidence</em>.
+            </p>
+            <p>
+              Generally, the evidence is assessed by a <em>verifier</em>, who collects <em>endorsements</em> from the CPU vendor.
+              They produce a <em>report</em>, used to decide whether or not to trust the TEE.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h2>Trusted Execution Environments</h2>
+            <h3>What a TEE protects against</h3>
+            <div class="r-stack">
+              <img width="1000" src="static/tee_protection.svg" />
+              <div class="fragment solid" style="padding: 10px">
+                <ul>
+                  <li>Attack from <em>host/hypervisor</em></li>
+                  <li><em>Vulnerabilities on the host</em></li>
+                  <li>Some types of <em>physical attack</em></li>
+                </ul>
+              </div>
+            </div>
+            <aside data-markdown class="notes">
+            </aside>
+          </section>
+          <section data-auto-animate>
+            <h2>Trusted Execution Environments</h2>
+            <h3>What a TEE doesn't protect against</h3>
+            <div class="r-stack">
+              <img width="1000" src="static/tee_protection_2.svg" />
+              <div class="fragment solid" style="padding: 10px">
+                <ul>
+                  <li>Software and processes <em>inside</em> the TEE</li>
+                  <li>Users with TEE access and <em>social engineering</em> attacks</li>
+                  <li>Some <em>side-channel</em> attacks</li>
+                </ul>
+              </div>
+            </div>
+            <!-- prettier-ignore -->
+            <aside data-markdown class="notes">
+            </aside>
+          </section>
+        </section>
+        <!--
+          Introduce security terms
+          Why would we not _always_ user TEEs?
+        -->
+        <section>
+          <section data-auto-animate>
+            <h2>Security</h2>
+            <h3>Is More Security Always Better?</h3>
             <p>Why not <em>all</em> the security <em>all</em> the time?</p>
             <!-- prettier-ignore -->
             <aside data-markdown class="notes">
               Markdown notes
             </aside>
           </section>
-          <section data-auto-animate>
-            <h2>Security Trade Off</h2>
-            <h3>Some Theory</h3>
+          <section data-auto-animate data-visibility="hidden">
+            <h2>Security</h2>
+            <h3>Trusted Compute Base</h3>
             <div class="columns">
               <div class="column" style="width: 35%">
-                <p class="fragment custom blur">Attack surface</p>
                 <p class="fragment custom blur">Trusted compute base</p>
-                <p class="fragment custom blur">
-                  Social engineering and non-technical vulnerabilities
-                </p>
               </div>
               <div class="column" style="width: 65%">
                 <img src="static/house.jpg" width="800" />
@@ -116,192 +191,32 @@
             </div>
             <!-- prettier-ignore -->
             <aside data-markdown class="notes">
-              - Attack Surface: all of the targets that could be attacked
-                - May be exposed network points
-                - Think, all of the points to enter a house, doors, windows
               - Trusted compute base: all of the computer components you need to trust for security
                 - Think, what needs to work to secure a house, locks, hinges
-              - Social engineering: pressuring or persuading people to compromise security
-                - Could be bribing, threats
-                - For example, who has left the door open!
             </aside>
           </section>
           <section data-auto-animate>
-            <h2>Security Trade Off</h2>
+            <h2>Security</h2>
             <p>There is a <em>cost</em> to introducing security</p>
             <ul>
-              <li class="fragment custom blur">Deployment</li>
-              <li class="fragment custom blur">Upkeep</li>
+              <li class="fragment custom blur">Hardware provisioning</li>
+              <li class="fragment custom blur">TRE design</li>
+              <li class="fragment custom blur">Supporting infrastructure</li>
               <li class="fragment custom blur">Increased complexity</li>
             </ul>
-            <p class="fragment custom blur">
-              If users feel security is a <em>burden</em> they may try to
-              <em>work around</em> it!
-            </p>
             <!-- prettier-ignore -->
             <aside data-markdown class="notes">
               Markdown notes
             </aside>
           </section>
           <section data-auto-animate>
-            <h2>Security Trade Off</h2>
-            <h3>When not to add more</h3>
+            <h2>Security</h2>
+            <h3>When Not to Add More</h3>
             <ul>
+              <li>We have effective <em>non-technical</em> controls</li>
               <li>The cost <em>outweighs</em> the benefit</li>
               <li><em>Overlaps</em> with existing controls</li>
             </ul>
-            <p class="fragment custom blur">
-              However, <em>independent</em> controls for the same vulnerability
-              make systems <em>more robust</em>
-            </p>
-            <!-- prettier-ignore -->
-            <aside data-markdown class="notes">
-              - A dedicated security team _would_ improve your home security, but it is necessary?
-                Could you afford it?
-              - If your door already has a strong, multi-point lock, dead bolts add less benefit than if there were no lock
-              - Or, locks on windows above the ground floor are less important
-            </aside>
-          </section>
-        </section>
-        <section>
-          <section data-auto-animate>
-            <h2>A Refresher</h2>
-            <h3>Trusted Research Environments</h3>
-            <div class="r-stack">
-              <figure>
-                <img width="500" src="static/sensitive-data.jpg" />
-                <figcaption>
-                  <a href="https://doi.org/10.5281/zenodo.13882307">
-                    The Turing Way Community, &amp; Scriberia. (2024).
-                    Illustrations from The Turing Way: Shared under CC-BY 4.0
-                    for reuse.
-                  </a>
-                </figcaption>
-              </figure>
-              <blockquote class="fragment" style="background-color: #002b36">
-                <em>Secure</em> computational environments which
-                <em>enable research</em> on sensitive data. They contain tools
-                to improve research <em>speed and quality</em> as well as
-                controls for <em>access</em>, and <em>data release</em>.
-              </blockquote>
-            </div>
-          </section>
-          <section data-auto-animate>
-            <h2>A Refresher</h2>
-            <h3>Trusted Execution Environments</h3>
-            <div class="r-stack">
-              <img class="r-stretch" src="static/secure_memory.svg" />
-              <blockquote class="fragment" style="background-color: #002b36">
-                With a <em>Trusted Execution Environment</em> (TEE), you can use
-                a computer in a way that is <em>private</em> from other users,
-                even the <em>owner</em> of that computer. Works through
-                <em>encrypting</em> data <em>in use</em>.
-              </blockquote>
-            </div>
-          </section>
-        </section>
-        <section>
-          <section data-auto-animate>
-            <h2>TEEs for TREs</h2>
-            <h3>What a TEE protects against</h3>
-            <img width="1000" src="static/tee_protection.svg" />
-            <aside data-markdown class="notes">
-              - All users/processes one the same host, outside your TEE
-              (including other TEEs) - For example, other users on the same
-              computer - The admins of the host - An attacker who compromises
-              the host
-            </aside>
-          </section>
-          <section data-auto-animate>
-            <h2>TEEs for TREs</h2>
-            <h3>What a TEE doesn't protect against</h3>
-            <div class="r-stack">
-              <img width="1000" src="static/tee_protection_2.svg" />
-              <p class="fragment solid"><em>Social engineering</em> attacks</p>
-            </div>
-            <!-- prettier-ignore -->
-            <aside data-markdown class="notes">
-              - Users/processes _within_ the TEE
-              - Social engineering attacks
-            </aside>
-          </section>
-          <section data-auto-animate>
-            <h2>TEEs for TREs</h2>
-            <h3>The cost of TEEs</h3>
-            <ul>
-              <li class="fragment custom blur">
-                Requires <em>recent</em> CPUs
-              </li>
-              <li class="fragment custom blur">
-                Must <em>attest</em> all TEEs
-              </li>
-              <li class="fragment custom blur">
-                An <em>attestation policy</em> must be created and maintained
-              </li>
-            </ul>
-            <!-- prettier-ignore -->
-            <aside data-markdown class="notes">
-              - Specific hardware is required
-              - Provisioning is more complicated, attestation must occur
-              - Need extra processes to check compliance
-              - Attestation can be partially automated, with a suitable policy.
-                However, it is still necessary to design a robust and appropriate policy, and review this.
-            </aside>
-          </section>
-        </section>
-        <section>
-          <section data-auto-animate>
-            <h2>TRE scenarios</h2>
-            <h3>Hosting and Shared Responsibility</h3>
-            <p><em>Self-hosted</em> or <em>third party</em> hosting</p>
-            <!-- <p>For example,</p> -->
-            <ul>
-              <li class="fragment custom blur">
-                SAIL Databank, hosted and operated <em>on-premises</em> by
-                Swansea University
-              </li>
-              <li class="fragment custom blur">
-                A FRIDGE instance, <em>operated</em> by The Turing,
-                <em>hosted</em> by Cambridge University
-              </li>
-              <li class="fragment custom blur">
-                A Data Safe Haven instance, <em>operated</em> by The Turing,
-                <em>hosted</em> on The Turing's Azure <em>tenant</em>
-              </li>
-              <li class="fragment custom blur">
-                OpenSAFELY, <em>operated</em> by the Bennett Institute,
-                <em>distributed</em> on the <em>cloud</em> and
-                <em>safe havens</em>
-              </li>
-            </ul>
-            <!-- prettier-ignore -->
-            <aside data-markdown class="notes">
-              - Self-hosted
-              - Third party host
-            </aside>
-          </section>
-          <section data-auto-animate>
-            <h2>TRE scenarios</h2>
-            <h3>Isolated Workspace</h3>
-            <img class="r-stretch" src="static/isolated_workspaces.svg" />
-            <!-- prettier-ignore -->
-            <aside data-markdown class="notes">
-              - Projects isolated by machines (VMs)
-            </aside>
-          </section>
-          <section data-auto-animate>
-            <h2>TRE scenarios</h2>
-            <h3>User-level Controls</h3>
-            <img class="r-stretch" src="static/rbac.svg" />
-            <!-- prettier-ignore -->
-            <aside data-markdown class="notes">
-              - _e.g._ Scottish NHS Safe Haven (circa 2020)
-            </aside>
-          </section>
-          <section data-auto-animate>
-            <h2>TRE scenarios</h2>
-            <h3>Satellite Runner</h3>
-            <img class="r-stretch" src="static/satellite.svg" />
             <!-- prettier-ignore -->
             <aside data-markdown class="notes">
             </aside>
@@ -309,65 +224,163 @@
         </section>
         <section>
           <section data-auto-animate>
-            <h2>A Proposal</h2>
-            <h3>Variables</h3>
-            <ul>
-              <li>Who <em>controls</em> the <em>host</em>?</li>
-              <li><em>Trust</em> in the <em>host</em> or host admins</li>
-              <li>
-                TRE <em>design</em>
-                <ul>
-                  <li>Do <em>users/projects</em> need to be isolated?</li>
-                  <li>What is the model for <em>multi-user/tenancy?</em></li>
-                </ul>
-              </li>
-            </ul>
-          </section>
-          <section data-auto-animate>
-            <h2>A Proposal</h2>
-            <h3>IETF RFC 2119</h3>
-            <blockquote>
-              The key words <em>"MUST"</em>, "MUST NOT", "REQUIRED", "SHALL",
-              "SHALL NOT", <em>"SHOULD"</em>, "SHOULD NOT", "RECOMMENDED",
-              <em>"MAY"</em>, and "OPTIONAL" in this document are to be
-              interpreted as described in
-              <a href="https://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>.
-            </blockquote>
-            <!-- prettier-ignore -->
-            <aside data-markdown class="notes">
-              - Internet Engineering Task Force
-              - Request for comments
-              - A document explaining the meaning of terms like "MUST", "SHOULD", "MAY"
-              - I wanted to find a way to fit combinations of variables to these terms, but it didn't feel that simple
-            </aside>
-          </section>
-          <section data-auto-animate>
-            <h2>A Proposal</h2>
+            <h2>Recommendations</h2>
             <p>Use a TEE as part of your TRE when,</p>
             <ol>
-              <li class="fragment custom blur">
-                you require strong isolation <em>from the host</em>
-                <p class="fragment custom current-blur">
-                  for example when the host <em>is not</em> the TRE operator
-                </p>
-              </li>
-              <li class="fragment custom blur">
-                you require strong isolation <em>between jobs</em>
-                <p class="fragment custom current-blur">
-                  for example when data access is managed at the
-                  <em>user level</em> or multiple projects
-                  <em>share compute</em>
-                </p>
-              </li>
-              <li class="fragment custom blur">
-                you are handling <em>highly sensitive</em> data
-                <p class="fragment custom current-blur">
-                  where the risk justifies maximising security, for example
-                  danger to <em>safety or life</em>
-                </p>
-              </li>
+              <li class="fragment custom highlight">When strong isolation from the host is required</li>
+              <li class="blur">Using low trust devices</li>
+              <li class="blur">When high sensitive data must be used</li>
             </ol>
           </section>
+          <section data-auto-animate>
+            <h2>Recommendations</h2>
+            <h3>Strong Isolation</h3>
+            <p>
+              <!-- TREs operators must have trust in their infrastructure provider. -->
+              There are cases where extra protection from compromised hosts is valuable.
+            </p>
+            <div class="columns">
+              <div class="column" style="width: 50%">
+                <h4>TRE and infrastructure are operated by different parties</h4>
+                <ul>
+                  <li>TRE on <em>cloud</em></li>
+                  <li><em>Satellite</em> TREs</li>
+                  <li><em>Federated</em> research</li>
+                </ul>
+              </div>
+              <div class="column" style="width: 50%">
+                <h4>TRE infrastructure is not exclusive</h4>
+                <p>
+                  Systems used for <em>confidential and non-confidential</em> work have higher risk.
+                </p>
+              </div>
+            </div>
+          </section>
+          <section data-auto-animate>
+            <h2>Recommendations</h2>
+            <p>Use a TEE as part of your TRE when,</p>
+            <ol>
+              <li>When strong isolation from the host is required</li>
+              <li class="fragment custom highlight">Using low trust devices</li>
+              <li class="blur">When high sensitive data must be used</li>
+            </ol>
+          </section>
+          <section data-auto-animate>
+            <h2>Recommendations</h2>
+            <h3>Low-Trust Devices</h3>
+            <p>
+              TEEs can enable <em>new models</em> of trusted research.
+            </p>
+            <p>
+              TEEs <em>don't depend</em> on the security of the host to run confidential workloads.
+            </p>
+            <ul>
+              <li><em>Bring your own</em> compute</li>
+              <li><em>Mesh/distributed</em> TREs</li>
+              <li><em>Data subject</em> devices</li>
+            </ul>
+          </section>
+          <section data-auto-animate>
+            <h2>Recommendations</h2>
+            <p>Use a TEE as part of your TRE when,</p>
+            <ol>
+              <li>When strong isolation from the host is required</li>
+              <li>Using low trust devices</li>
+              <li class="fragment custom highlight">When high sensitive data must be used</li>
+            </ol>
+          </section>
+          <section data-auto-animate>
+            <h2>Recommendations</h2>
+            <h3>Extreme Data Sensitivity</h3>
+            <p>
+              When it is <em>not possible</em> to modify data to reduce disclosure risk (as in Five Safes).
+            </p>
+            <p>
+              Situations where <em>highly-motivated</em>, <em>sophisticated</em> attackers may target the TRE infrastructure or infrastructure operator staff.
+            </p>
+            <p class="fragment custom blur">
+              In the future, <em>LLM agents</em> may significantly <em>lower the barrier</em> to launching this kind of attack.
+            </p>
+          </section>
+        </section>
+        <section>
+          <section data-auto-animate>
+            <h2>Considerations</h2>
+            <p>TEEs are not a "drop-in" solution.</p>
+          </section>
+          <section data-auto-animate>
+            <h2>Considerations</h2>
+            <h3>Hardware Support and Availability</h3>
+            <p>
+              Support is currently limited to the latest <em>data centre hardware</em>
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h2>Considerations</h2>
+            <h3>TEE and Host Configuration</h3>
+            <ul>
+              <li><em>BIOS (UEFI)</em></li>
+              <li>Compatible <em>OS and kernel</em></li>
+              <li><em>Guest OS</em> (for confidential VMs)</li>
+              <li>Trusted <em>devices</em> such as GPUs</li>
+          </section>
+          <section data-auto-animate>
+            <h2>Considerations</h2>
+            <h3>TRE Design and Implementation Cost</h3>
+            <p>
+              TREs will need to be <em>modified</em>.
+            </p>
+            <p>
+              Software inside a TEE <em>must be trusted</em>. Care must be taken to <em>minimise</em> the trusted application(s).
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h2>Considerations</h2>
+            <h3>Attestation Infrastructure</h3>
+            <p>
+              If you don't <em>inspect</em> an attestation report, you don't know if a TEE is secure!
+            </p>
+            <p>
+              Attestation <em>policies</em> must be <em>developed and maintained</em>.
+            </p>
+            <p>
+              Some approaches will require more infrastructure, for example workload-level attestation, or ejecting non-compliant TEEs.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h2>Considerations</h2>
+            <h3>Vendor Lock-in and Portability</h3>
+            <p>
+              Adopting TEEs may require building on <em>vendor-specific</em> features, APIs and attestation fields.
+            </p>
+            <p>
+              Generic interfaces to TEEs are in the early stages of development
+            </p>
+          </section>
+        </section>
+        <section>
+          <h2>Breakout</h2>
+          <ul>
+            <li>
+              What do you think of our <em>recommendations</em>?
+              <ul>
+                <li>What do you <em>agree and disagree</em> with?</li>
+                <li>Are they clear?</li>
+              </ul>
+            </li>
+            <li>
+              What do you think about <em>TEEs for TREs</em>?
+              <ul>
+                <li>Have you encountered TEEs before?</li>
+                <li>Would you want <em>TEEs in your TRE</em>?</li>
+                <li>What would it cost to implement?</li>
+              </ul>
+            </li>
+          </ul>
+          <br />
+          <i class="fa-solid fa-book"></i>&nbsp;<a href="https://alan-turing-institute.github.io/trustee_cc_review/tees-for-tres/#sec-recommendations">Read the full recommendations</a>
+          <br />
+          <i class="fa-solid fa-book"></i>&nbsp;<a href="https://alan-turing-institute.github.io/trustee_cc_review/tees-for-tres/#sec-considerations">and considerations</a>
         </section>
       </div>
     </div>
