@@ -118,20 +118,6 @@
           </section>
           <section data-auto-animate>
             <h2>Trusted Execution Environments</h2>
-            <h3>Attestation</h3>
-            <p>
-              A TEE is able to <em>prove</em> it is <em>secure and configured</em> correctly.
-            </p>
-            <p>
-              The <em>secure processor</em> collects and signs <em>evidence</em>.
-            </p>
-            <p>
-              Generally, the evidence is assessed by a <em>verifier</em>, who collects <em>endorsements</em> from the CPU vendor.
-              They produce a <em>report</em>, used to decide whether or not to trust the TEE.
-            </p>
-          </section>
-          <section data-auto-animate>
-            <h2>Trusted Execution Environments</h2>
             <h3>What a TEE protects against</h3>
             <div class="r-stack">
               <img width="1000" src="static/tee_protection.svg" />
@@ -162,6 +148,60 @@
             <!-- prettier-ignore -->
             <aside data-markdown class="notes">
             </aside>
+          </section>
+        </section>
+        <!--
+          Attestation
+        -->
+        <section>
+          <section data-auto-animate>
+            <h2>Attestation</h2>
+            <h3>How do we trust TEEs?</h3>
+            <p>TEEs run on <em>untrusted</em> hardware and software</p>
+            <p>So, how do we <em>establish trust</em>?</p>
+            <p class="fragment custom blur"><em>Attestation</em> is the process where a TEE <em>proves</em> its state</p>
+          </section>
+          <section data-auto-animate>
+            <h2>Attestation</h2>
+            <h3>How does it work?</h3>
+            <p>
+            The <em>secure processor</em> collects <em>evidence</em> and <em>signs</em> its claims.
+            </p>
+            <p>
+              The evidence is assessed by a <em>verifier</em>, who collects <em>endorsements</em> from the CPU vendor.
+            </p>
+            <p>
+            The <em>verifier</em> produces a <em>report</em>, used to decide whether or not to trust the TEE.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h2>Attestation</h2>
+            <h3>How can we rely on this?</h3>
+            <p>
+            If the evidence or report are <em>tampered</em> with, the signature wouldn't match
+            </p>
+            <p>
+            Evidence cannot be <em>forged</em>, as it requires the secure processor's private key
+            </p>
+            <p class="fragment custom blur">
+            So, the report is a set of <em>correct claims</em>, endorsed by the CPU vendor.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h2>Attestation</h2>
+            <h3>Where is the trust?</h3>
+            <p>
+            As the <em>secure processor</em> collects and signs evidence,
+            the host OS, software and hypervisor don't need to be trusted.
+            </p>
+            <p>
+            You must trust
+            <ul>
+              <li>The secure processor</li>
+              <li>The verifier</li>
+              <li>The CPU vendor</li>
+            </ul>
+            </p>
           </section>
         </section>
         <!--
