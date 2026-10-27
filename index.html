@@ -88,7 +88,7 @@
         background-color: #002b36;
         opacity: 1;
       }
-      .blur{
+      .blur {
         filter: blur(8px);
       }
     </style>
@@ -107,7 +107,7 @@
           <section data-auto-animate>
             <h2>Trusted Execution Environments</h2>
             <div class="r-stack">
-              <p class="fragment fade-out solid" >
+              <p class="fragment fade-out solid">
                 TEEs <em>encrypt</em> data <em>in use</em>.<br />
                 With a TEE, you can use a computer in a way that is
                 <em>private</em> from other users, even the <em>owner</em> of
@@ -129,8 +129,7 @@
                 </ul>
               </div>
             </div>
-            <aside data-markdown class="notes">
-            </aside>
+            <aside data-markdown class="notes"></aside>
           </section>
           <section data-auto-animate>
             <h2>Trusted Execution Environments</h2>
@@ -140,8 +139,14 @@
               <div class="fragment solid" style="padding: 10px">
                 <ul>
                   <li>Software and processes <em>inside</em> the TEE</li>
-                  <li>Users with TEE access and <em>social engineering</em> attacks</li>
-                  <li>Some <em>side-channel</em> and <em>advanced physical access</em>attacks</li>
+                  <li>
+                    Users with TEE access and
+                    <em>social engineering</em> attacks
+                  </li>
+                  <li>
+                    Some <em>side-channel</em> and
+                    <em>advanced physical access</em>attacks
+                  </li>
                 </ul>
               </div>
             </div>
@@ -159,49 +164,56 @@
             <h3>How do we trust TEEs?</h3>
             <p>TEEs run on <em>untrusted</em> hardware and software</p>
             <p>So, how do we <em>establish trust</em>?</p>
-            <p class="fragment custom blur"><em>Attestation</em> is the process where a TEE <em>proves</em> its state</p>
+            <p class="fragment custom blur">
+              <em>Attestation</em> is the process where a TEE
+              <em>proves</em> its state
+            </p>
           </section>
           <section data-auto-animate>
             <h2>Attestation</h2>
             <h3>How does it work?</h3>
             <p>
-            The <em>secure processor</em> collects <em>evidence</em> and <em>signs</em> its claims.
+              The <em>secure processor</em> collects <em>evidence</em> and
+              <em>signs</em> its claims.
             </p>
             <p>
-              The evidence is assessed by a <em>verifier</em>, who collects <em>endorsements</em> from the CPU vendor.
+              The evidence is assessed by a <em>verifier</em>, who collects
+              <em>endorsements</em> from the CPU vendor.
             </p>
             <p>
-            The <em>verifier</em> produces a <em>report</em>, used to decide whether or not to trust the TEE.
+              The <em>verifier</em> produces a <em>report</em>, used to decide
+              whether or not to trust the TEE.
             </p>
           </section>
           <section data-auto-animate>
             <h2>Attestation</h2>
             <h3>How can we rely on this?</h3>
             <p>
-            If the evidence or report are <em>tampered</em> with, the signature wouldn't match
+              If the evidence or report are <em>tampered</em> with, the
+              signature wouldn't match
             </p>
             <p>
-            Evidence cannot be <em>forged</em>, as it requires the secure processor's private key
+              Evidence cannot be <em>forged</em>, as it requires the secure
+              processor's private key
             </p>
             <p class="fragment custom blur">
-            So, the report is a set of <em>correct claims</em>, endorsed by the CPU vendor.
+              So, the report is a set of <em>correct claims</em>, endorsed by
+              the CPU vendor.
             </p>
           </section>
           <section data-auto-animate>
             <h2>Attestation</h2>
             <h3>Where is the trust?</h3>
             <p>
-            As the <em>secure processor</em> collects and signs evidence,
-            the host OS, software and hypervisor don't need to be trusted.
+              As the <em>secure processor</em> collects and signs evidence, the
+              host OS, software and hypervisor don't need to be trusted.
             </p>
-            <p>
-            You must trust
+            <p>You must trust</p>
             <ul>
               <li>The secure processor</li>
               <li>The verifier</li>
               <li>The CPU vendor</li>
             </ul>
-            </p>
           </section>
         </section>
         <!--
@@ -269,7 +281,9 @@
             <h2>Recommendations</h2>
             <p>Use a TEE as part of your TRE when,</p>
             <ol>
-              <li class="fragment custom highlight">When strong isolation from the host is required</li>
+              <li class="fragment custom highlight">
+                When strong isolation from the host is required
+              </li>
               <li class="blur">Using low trust devices</li>
               <li class="blur">When highly sensitive data must be used</li>
             </ol>
@@ -279,11 +293,14 @@
             <h3>Strong Isolation</h3>
             <p>
               <!-- TREs operators must have trust in their infrastructure provider. -->
-              There are cases where extra protection from compromised hosts is valuable.
+              There are cases where extra protection from compromised hosts is
+              valuable.
             </p>
             <div class="columns">
               <div class="column" style="width: 50%">
-                <h4>TRE and infrastructure are operated by different parties</h4>
+                <h4>
+                  TRE and infrastructure are operated by different parties
+                </h4>
                 <ul>
                   <li>TRE on <em>cloud</em></li>
                   <li><em>Satellite</em> TREs</li>
@@ -293,7 +310,9 @@
               <div class="column" style="width: 50%">
                 <h4>TRE infrastructure is not exclusive</h4>
                 <p>
-                  Systems used for <em>confidential and non-confidential</em> work have higher risk.
+                  Systems used for
+                  <em>confidential and non-confidential</em> work have higher
+                  risk.
                 </p>
               </div>
             </div>
@@ -310,11 +329,10 @@
           <section data-auto-animate>
             <h2>Recommendations</h2>
             <h3>Low-Trust Devices</h3>
+            <p>TEEs can enable <em>new models</em> of trusted research.</p>
             <p>
-              TEEs can enable <em>new models</em> of trusted research.
-            </p>
-            <p>
-              TEEs <em>don't depend</em> on the security of the host to run confidential workloads.
+              TEEs <em>don't depend</em> on the security of the host to run
+              confidential workloads.
             </p>
             <ul>
               <li><em>Bring your own</em> compute</li>
@@ -328,20 +346,26 @@
             <ol>
               <li>When strong isolation from the host is required</li>
               <li>Using low trust devices</li>
-              <li class="fragment custom highlight">When highly sensitive data must be used</li>
+              <li class="fragment custom highlight">
+                When highly sensitive data must be used
+              </li>
             </ol>
           </section>
           <section data-auto-animate>
             <h2>Recommendations</h2>
             <h3>Extreme Data Sensitivity</h3>
             <p>
-              When it is <em>not possible</em> to modify data to reduce disclosure risk (as in Five Safes).
+              When it is <em>not possible</em> to modify data to reduce
+              disclosure risk (as in Five Safes).
             </p>
             <p>
-              Situations where <em>highly-motivated</em>, <em>sophisticated</em> attackers may target the TRE infrastructure or infrastructure operator staff.
+              Situations where <em>highly-motivated</em>,
+              <em>sophisticated</em> attackers may target the TRE infrastructure
+              or infrastructure operator staff.
             </p>
             <p class="fragment custom blur">
-              In the future, <em>LLM agents</em> may significantly <em>lower the barrier</em> to launching this kind of attack.
+              In the future, <em>LLM agents</em> may significantly
+              <em>lower the barrier</em> to launching this kind of attack.
             </p>
           </section>
           <section data-auto-animate>
@@ -351,8 +375,13 @@
               <li>
                 When <em>strong isolation from the host</em> is required
                 <ol style="list-style-type: lower-alpha">
-                  <li>TRE and computer are operated by <em>different organisations</em></li>
-                  <li>Computer is <em>not exclusive</em> to trusted research</li>
+                  <li>
+                    TRE and computer are operated by
+                    <em>different organisations</em>
+                  </li>
+                  <li>
+                    Computer is <em>not exclusive</em> to trusted research
+                  </li>
                 </ol>
               </li>
               <li>Using <em>low trust devices</em></li>
@@ -369,7 +398,8 @@
             <h2>Considerations</h2>
             <h3>Hardware Support and Availability</h3>
             <p>
-              Support is currently limited to the latest <em>data centre hardware</em>.
+              Support is currently limited to the latest
+              <em>data centre hardware</em>.
             </p>
           </section>
           <section data-auto-animate>
@@ -380,38 +410,43 @@
               <li>Compatible <em>OS and kernel</em></li>
               <li><em>Guest OS</em> (for confidential VMs)</li>
               <li>Trusted <em>devices</em> such as GPUs</li>
+            </ul>
           </section>
           <section data-auto-animate>
             <h2>Considerations</h2>
             <h3>TRE Design and Implementation Cost</h3>
+            <p>TREs will need to be <em>modified</em>.</p>
             <p>
-              TREs will need to be <em>modified</em>.
-            </p>
-            <p>
-              Software inside a TEE <em>must be trusted</em>. Care must be taken to <em>minimise</em> the trusted application(s).
+              Software inside a TEE <em>must be trusted</em>. Care must be taken
+              to <em>minimise</em> the trusted application(s).
             </p>
           </section>
           <section data-auto-animate>
             <h2>Considerations</h2>
             <h3>Attestation Infrastructure</h3>
             <p>
-              If you don't <em>inspect</em> an attestation report, you don't know if a TEE is secure!
+              If you don't <em>inspect</em> an attestation report, you don't
+              know if a TEE is secure!
             </p>
             <p>
-              Attestation <em>policies</em> must be <em>developed and maintained</em>.
+              Attestation <em>policies</em> must be
+              <em>developed and maintained</em>.
             </p>
             <p>
-              Some approaches will require more infrastructure, for example workload-level attestation, or ejecting non-compliant TEEs.
+              Some approaches will require more infrastructure, for example
+              workload-level attestation, or ejecting non-compliant TEEs.
             </p>
           </section>
           <section data-auto-animate>
             <h2>Considerations</h2>
             <h3>Vendor Lock-in and Portability</h3>
             <p>
-              Adopting TEEs may require building on <em>vendor-specific</em> features, APIs and attestation fields.
+              Adopting TEEs may require building on
+              <em>vendor-specific</em> features, APIs and attestation fields.
             </p>
             <p>
-              <em>Generic</em> interfaces to TEEs are in the early stages of development.
+              <em>Generic</em> interfaces to TEEs are in the early stages of
+              development.
             </p>
           </section>
         </section>
@@ -420,35 +455,42 @@
             <h2>Break Out Time</h2>
             <h3>Instructions</h3>
             <p>Discuss the <em>prompts</em> in <em>groups</em></p>
-            <p>A <em>facilitator</em> will join your group and <em>scribe</em></p>
-            <p>At the end, one person from each group will <em>share out</em></p>
+            <p>
+              A <em>facilitator</em> will join your group and <em>scribe</em>
+            </p>
+            <p>
+              At the end, one person from each group will <em>share out</em>
+            </p>
           </section>
           <section data-auto-animate>
             <h2>Break Out Time</h2>
             <h3>Prompts</h3>
             <p>
-            Do you have <em>feedback</em> for our <em>recommendations</em>?
+              Do you have <em>feedback</em> for our <em>recommendations</em>?
+            </p>
             <ul>
               <li>What do you <em>agree</em> and <em>disagree</em> with?</li>
               <!-- <li>What do you disagree with?</li> -->
               <li>Is it clear?</li>
             </ul>
-            </p>
-            <p>
-            What do <em>you</em> think about TEEs for TREs?
+            <p>What do <em>you</em> think about TEEs for TREs?</p>
             <ul>
               <li>Would you want TEEs in <em>your TRE</em>?</li>
               <li>Would it be worth the <em>cost</em>?</li>
               <li>Had you encountered TEEs before?</li>
             </ul>
-            </p>
           </section>
           <section data-auto-animate>
             <h2>Break Out Time</h2>
             <p>Read the recommendations (and considerations) in full</p>
-            <tt><a href="https://alan-turing-institute.github.io/trustee_cc_review/tees-for-tres/#sec-recommendations">alan-turing-institute.github.io/trustee_cc_review/tees-for-tres</a></tt>
+            <tt
+              ><a
+                href="https://alan-turing-institute.github.io/trustee_cc_review/tees-for-tres/#sec-recommendations"
+                >alan-turing-institute.github.io/trustee_cc_review/tees-for-tres</a
+              ></tt
+            >
             <br />
-            <img src="static/qr.png" class="r-stretch">
+            <img src="static/qr.png" class="r-stretch" />
           </section>
         </section>
       </div>
